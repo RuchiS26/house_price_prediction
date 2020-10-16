@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+	<center>
+		<h3>Model trained on  {{data}}</h3>	
+		<br>
+		<div class="col-md-5">
+		<div class="card shadow p-3 mb-6">
+			<div class="card-body">
+				<h2 style="color:#6B8E23;">$ {{result_pred}}</h2>is the predicted price for the following data input<br>
+				<hr>
+				<b>bedrooms</b> = {{bedrooms}}<br>
+				<b>bathrooms</b> = {{bathrooms}}<br>
+				<b>floors</b> = {{floors}}<br>
+				<b>condition</b> = {{condition}}<br>
+				<b>grade</b> = {{grade}}<br>
+				<b>sqft_living</b> = {{sqft_living}} sqft<br>
+				<b>sqft_lot</b> = {{sqft_lot}} sqft<br>
+				<b>sqft_above</b> = {{sqft_above}} sqft<br>
+				<b>sqft_basement</b> = {{sqft_basement}} sqft<br>
+				<b>sqft_living15</b> = {{sqft_living15}} sqft<br>
+				<b>sqft_lot15</b> = {{sqft_lot15}}sqft<br>
+				<b>yr_built</b> = {{yr_built}}<br>
+			</div>
+		</div>
+		</div>
+		<br>
+		<a class="btn btn-outline-dark" href="{% url 'dashboard:dashboard-render' data.slug %}">Back to Dashboard</a>
+	</center>
+</div>
+{% endblock %}

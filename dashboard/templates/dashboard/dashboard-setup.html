@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class = "container">
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Add Data to Store</h2>
+				<hr>
+				<div class="card shadow p-3 mb-5">
+					<div class="card-body">
+						<form class="form-group" method="POST" action="{% url 'dashboard:dashboard-setup' %}" enctype="multipart/form-data">
+							{% csrf_token %}
+							{{dataform|crispy}}
+							<input type="submit" name="Submit" value="Submit">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<h2>Data In Store</h2>
+				<hr>
+				<div class="card shadow p-3 mb-5">
+					<div class="card-body">
+						<div class="row">
+							{% for data in avail_data %}
+							<div class="col-md-4">
+								<b>{{data.name}}</b>
+							</div>
+							<div class="col-md-4">
+								<small>{{data.date_added}}</small>
+							</div>
+							<div class="col-md-4">
+								<a href="{% url 'dashboard:dashboard-render' data.slug %}" class="btn btn-outline-primary">Use Data</a>
+							</div>
+							<br><br>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

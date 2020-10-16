@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class = "container-fluid">
+
+		<div class="row">
+			<div class="col-md-8">
+				<div class="card shadow p-3 mb-5">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-3">
+								<font size="6" color="orange">{{count_row}}</font><br><font size="4">Rows</font>
+							</div>
+							<div class="col-md-3">
+								<font size="6" color="orange">{{mean_price}}</font><br><font size="4">Average Price</font>
+							</div>
+							<div class="col-md-3">
+								<font size="6" color="orange">{{reg_score}}%</font><br><font size="4">Model Accurary</font>
+							</div>
+							<div class="col-md-3">
+								<font size="6" color="orange">{{rms}}</font><br><font size="4">Root Mean Square Error</font>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-xl-3 xol-lg-3 col-md-6 col-sm-6">
+								<center>
+									<a href="{% static 'heatmap.png' %}" target="_blank"><img src="{% static 'heatmap.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>HeatMap
+								</center>
+								<br>
+							</div>
+							<div class="col-xl-3 xol-lg-3 col-md-6 col-sm-6">
+								<center>
+									<a href="{% static 'grade-price.png' %}" target="_blank"><img src="{% static 'grade-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>Grade vs Price
+								</center>
+								<br>
+							</div>
+							<div class="col-xl-3 xol-lg-3 col-md-6 col-sm-6">
+								<center>
+									<a href="{% static 'condition-price.png' %}" target="_blank"><img src="{% static 'condition-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>Condition vs Price
+								</center>
+								<br>
+							</div>
+							<div class="col-xl-3 xol-lg-3 col-md-6 col-sm-6">	
+								<center>
+									<a href="{% static 'view-price.png' %}" target="_blank"><img src="{% static 'view-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>View vs Price
+								</center>
+							</div>
+							<div class="col-xl-4 xol-lg-4 col-md-6 col-sm-6">	
+								<center>
+									<a href="{% static 'bedrooms-price.png' %}" target="_blank"><img src="{% static 'bedrooms-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>Bedrooms vs Price
+								</center>
+							</div>
+							<div class="col-xl-4 xol-lg-4 col-md-6 col-sm-6">	
+								<center>
+									<a href="{% static 'bathrooms-price.png' %}" target="_blank"><img src="{% static 'bathrooms-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>Bathrooms vs Price
+								</center>
+							</div>
+							<div class="col-xl-4 xol-lg-4 col-md-6 col-sm-6">	
+								<center>
+									<a href="{% static 'floors-price.png' %}" target="_blank"><img src="{% static 'floors-price.png' %}" style="width:200px;height: 200px;" class="img-thumbnail"></a><br>Floors vs Price
+								</center>
+							</div>
+						</div><br>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card shadow p-3 mb-5">
+					<div class="card-body">
+						<center>
+							<h4>Prediction Form</h4><br>
+							<form class="form-group" method="POST" action="{% url 'dashboard:dashboard-compute-pred' %}"> 
+								{% csrf_token %}
+								<input type="number" name="bedrooms" class="form-control" placeholder="No.of Bedrooms - Range(2 - 11)">
+								<input type="number" name="bathrooms" class="form-control" placeholder="No.of Bathrooms - Range(1 - 8)">
+								<input type="number" name="floors" class="form-control" placeholder="No.of Floors - Range(1 - 4)">
+								<input type="number" name="condition" class="form-control" placeholder="Condition - Range(1 - 5)">
+								<input type="number" name="grade" class="form-control" placeholder="Grade - Range(1 - 13)">
+								<input type="number" name="sqft_living" class="form-control" placeholder="Living Space in sqft - Range(290 - 10540)">
+								<input type="number" name="sqft_lot" class="form-control" placeholder="Lot Space in sqft - Range(651 - 11390)">
+								<input type="number" name="sqft_above" class="form-control" placeholder="Living Space above in sqft - Range(290 - 9410)">
+								<input type="number" name="sqft_basement" class="form-control" placeholder="Basement Space above in sqft - Range(0 - 4820)">
+								<input type="number" name="sqft_living15" class="form-control" placeholder="Living Space of nearby in sqft - Range(399 - 6210)">
+								<input type="number" name="sqft_lot15" class="form-control" placeholder="Lot Space of nearby in sqft - Range(651 - 11390)">
+								<input type="number" name="yr_built" class="form-control" placeholder="Year built - Range(1900 - 2015)"><br>
+								<input type="hidden" name="data" value={{data.slug}}>
+								<input type="submit" name="Submit" value="Submit" class="btn btn-outline-success"><br>
+							</form>
+						</center>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
